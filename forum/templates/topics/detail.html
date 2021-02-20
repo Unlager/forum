@@ -1,0 +1,32 @@
+{% extends 'base.html' %}
+
+<title>{% block title %}{{topic.topic_title}}{% endblock %}</title>
+
+{% block content %}
+
+<h2>{{topic.topic_title}}</h2>
+<p>{{topic.topic_text}}</p>
+
+<hr>
+
+{% if latest_comments_list %}
+	{% for c in latest_comments_list %}
+		<p>
+			<strong>{{c.author_name}}</strong>
+			<p>{{c.comment_text}}</p>
+		</p>
+	{% endfor %}
+{% else %}
+Нет комментариев :(
+{% endif %}
+
+<hr>
+
+<form action = "{% url 'topics:leave_comment' topic.id %}" method ="POST">
+	{% csrf_token %}
+	<input type="text" required placeholder="Name" name="name"><br>
+	<textarea name="text" required="" placeholder="Текст комментария" cols="30" rows="10"></textarea><br>
+	<button type = "submit">Отправить</button>
+</form>
+
+{% endblock %}

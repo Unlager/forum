@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+
+<title>{% block title %}Мой сайт{% endblock %}</title>
+
+{% block content %}
+
+	{% if latest_topics_list %}
+		{% for a in latest_topics_list %}
+			<a href="{% url 'topics:detail' a.id %}">{{a.topic_title}}</a>
+		{% endfor %}
+	{% else %}
+		Статьи не найдены :(
+	{% endif %}
+
+{% endblock %}
