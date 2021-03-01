@@ -1,0 +1,57 @@
+{% extends 'base.html' %}
+
+<title>{% block title %}Пост{% endblock %}</title>
+
+{% block content %}
+<br>
+<form action = "{% url 'topics:create_post' %}" method ="POST">
+	{% csrf_token %}
+	<input type="text" class="form-control"  required placeholder="Название" name="title"><br>
+	<textarea name="text" style = "height: 300px;" class="form-control" placeholder="Текст публикации" ></textarea>
+	<br>
+		<div class="btn-group">
+		  <button type="Выбор" class="btn btn-outline-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+			Action
+		  </button>
+		  <ul class="dropdown-menu">
+
+			 <li> <div class="form-check">
+				  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios1" value="option1" checked>
+				  <label class="form-check-label" for="exampleRadios1">
+					МГУПП
+				  </label>
+				</div>
+			 </li>
+			  <li>
+				  <div class="form-check">
+					  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+					  <label class="form-check-label" for="exampleRadios2">
+						Образование
+					  </label>
+					</div>
+			  </li>
+			  <li>
+				  <div class="form-check">
+					  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+					  <label class="form-check-label" for="exampleRadios2">
+						Флуд
+					  </label>
+					</div>
+			  </li>
+			  <li>
+				  <div class="form-check">
+					  <input class="form-check-input" type="radio" name="exampleRadios" id="exampleRadios2" value="option2">
+					  <label class="form-check-label" for="exampleRadios2">
+						Другое
+					  </label>
+					</div>
+			  </li>
+		  </ul>
+		</div>
+
+	<div >
+		<br>
+	<button type="submit" class="btn btn-primary form-control">Отправить</button>
+	</div>
+</form>
+{% endblock %}
