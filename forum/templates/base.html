@@ -48,10 +48,14 @@
       </button>
       <div class="collapse navbar-collapse" id="navbarCollapse">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
+          	<li class="nav-item">
 	            <a class="nav-link" aria-current="page" href="/">Главная</a>
-	          </li>
+		  	</li>
 			{% if request.user.is_authenticated %}
+			<li class="nav-item">
+	            <a class="nav-link" aria-current="page" href="{% url 'accounts:profile' %}">Личный кабинет</a>
+			</li>
+
 	          <li class="nav-item">
 	            <a class="nav-link" href = "{% url 'topics:post' %}">Создать тему</a>
 	      </li>
@@ -59,6 +63,10 @@
         </ul>
 		  <form class="form-inline mt-2 mt-md-0">
 		  	{% if request.user.is_authenticated %}
+
+			  <div style = "margin-right: 10px;">
+				  {{request.user.username}}
+			</div>
 			   <a href="{% url 'accounts:logout' %}" class="btn btn-primary my-2 my-sm-0">Выход</a>
 			{% else %}
 			   <a href="{% url 'accounts:login' %}" class=" btn btn-primary my-2 my-sm-0">Вход</a>

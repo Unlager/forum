@@ -1,17 +1,8 @@
-{% extends 'base.html' %}
-
-{% block title %}МБ{% endblock %}
-
-{% block content %}
-
-
-		<div class="my-3 p-3 bg-white rounded box-shadow">
-
-			<h5>«Топики»</h5>
-			<hr>
-
-			{% if latest_topics_list %}
-					{% for a in latest_topics_list %}
+{% extends 'base.html' %} &nbsp;{% block content %}
+<br>
+<h3>Мои посты:</h3>
+{% if topic %}
+        {% for a in topic %}
 
 			<div class="media text-muted pt-3">
 				<img data-src="holder.js/32x32?theme=thumb&amp;bg=007bff&amp;fg=007bff&amp;size=1" alt="32x32" class="mr-2 rounded" style="width: 32px; height: 32px;" src="data:image/svg+xml;charset=UTF-8,%3Csvg%20width%3D%2232%22%20height%3D%2232%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%20viewBox%3D%220%200%2032%2032%22%20preserveAspectRatio%3D%22none%22%3E%3Cdefs%3E%3Cstyle%20type%3D%22text%2Fcss%22%3E%23holder_177cf5504d3%20text%20%7B%20fill%3A%23007bff%3Bfont-weight%3Abold%3Bfont-family%3AArial%2C%20Helvetica%2C%20Open%20Sans%2C%20sans-serif%2C%20monospace%3Bfont-size%3A2pt%20%7D%20%3C%2Fstyle%3E%3C%2Fdefs%3E%3Cg%20id%3D%22holder_177cf5504d3%22%3E%3Crect%20width%3D%2232%22%20height%3D%2232%22%20fill%3D%22%23007bff%22%3E%3C%2Frect%3E%3Cg%3E%3Ctext%20x%3D%2212.291666746139526%22%20y%3D%2216.999999976158144%22%3E32x32%3C%2Ftext%3E%3C%2Fg%3E%3C%2Fg%3E%3C%2Fsvg%3E" data-holder-rendered="true">
@@ -19,15 +10,18 @@
 				<strong class="d-block text-gray-dark"><a href="{% url 'topics:detail' a.id %}">{{a.topic_title}}</a></strong>
 					#{{a.topic_subject}}
 			  </p>
+			{% if request.user.id == a.author_id %}
+				<a class="btn btn-link" title="Удалить" href="{% url 'topics:delete_post' a.id %}">
+					<svg width="1em" height="1em" viewBox="0 0 16 16" class="bi bi-x-circle" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+					  <path fill-rule="evenodd" d="M8 15A7 7 0 1 0 8 1a7 7 0 0 0 0 14zm0 1A8 8 0 1 0 8 0a8 8 0 0 0 0 16z"/>
+					  <path fill-rule="evenodd" d="M11.854 4.146a.5.5 0 0 1 0 .708l-7 7a.5.5 0 0 1-.708-.708l7-7a.5.5 0 0 1 .708 0z"/>
+					  <path fill-rule="evenodd" d="M4.146 4.146a.5.5 0 0 0 0 .708l7 7a.5.5 0 0 0 .708-.708l-7-7a.5.5 0 0 0-.708 0z"/>
+					</svg>
+				</a>
+			{% endif %}
 			</div>
 
-					{% endfor %}
-				{% else %}
-					Статьи не найдены :(
-			{% endif %}
+        {% endfor %}
+{% endif %}
 
-			<small class="d-block text-right mt-3">
-			  <a href="#">Все статьи</a>
-			</small>
-      	</div>
-{% endblock %}
+{% endblock content %}
